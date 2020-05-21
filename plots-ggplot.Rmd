@@ -8,3 +8,59 @@ output: html_document
 # Plots with ggplot2
 
 We are going to make plots in R and it's going to be amazing.
+
+
+# cargar librerías
+library(tidyverse)
+library(readxl)
+library(here)
+
+
+# Leer archivos .csv
+ca_np <- read_csv(here("data", "ca_np.csv"))
+
+# Explorar los datos
+view(ca_np)
+names(ca_np)
+head(ca_np)
+summary(ca_np)
+
+
+# Leer archivos en .xlsx
+ci_np <- read_excel(here("data", "ci_np.xlsx"))
+
+# Explorar los datos
+view(ci_np)
+names(ci_np)
+head(ci_np)
+summary(ci_np)
+
+
+# Graficar los datos con ggplot2
+# Generally, that structure will look like this:
+
+#ggplot(data = df_name, aes(x = x_var_name, y = y_var_name)) +
+#  geom_type()
+
+#Breaking that down:
+
+#    First, tell R you’re using ggplot()
+#    Then, tell it the object name where variables exist (data = df_name)
+#    Next, tell it the aesthetics aes() to specify which variables you want to plot
+#    Then add a layer for the type of geom (graph type) with geom_*() - for example, geom_point() is a scatterplot, geom_line() is a line graph, geom_col() is a column graph, etc.
+
+ggplot(data = ci_np, aes(x= year, y=visitors)) + 
+  geom_line()
+
+# Guardar en un objeto los datos a graficar
+gg_base <-  ggplot(data = ci_np, aes(x = year, y = visitors))
+
+gg_base +
+  geom_point()
+
+gg_base +
+  geom_col()
+
+gg_base +
+  geom_area()
+
